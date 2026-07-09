@@ -74,7 +74,7 @@ An audit log for tracking user activity and productivity metrics.
 ### Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/VIJAYAPANDIANT/To-Do-List-in-JS.git
+   git clone https://github.com/VIJAYAPANDIANT/to-do-list-in-js.git
    ```
 2. **Launch the App**:
    Simply open `index.html` in your preferred browser.
