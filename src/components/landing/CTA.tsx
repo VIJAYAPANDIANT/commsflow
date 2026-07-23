@@ -47,7 +47,7 @@ export const CTA: React.FC = () => {
               <span>Get Started Free</span>
               <ArrowRight className="h-4.5 w-4.5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="glass" size="lg" className="w-full sm:w-auto">
+            <Button variant="glass" size="lg" onClick={() => setCurrentView('register')} className="w-full sm:w-auto">
               Schedule Enterprise Demo
             </Button>
           </div>

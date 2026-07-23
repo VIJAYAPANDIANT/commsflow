@@ -58,7 +58,7 @@ export const Hero: React.FC = () => {
             <span>Start Building for Free</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="glass" size="lg" className="w-full sm:w-auto flex items-center space-x-2">
+          <Button variant="glass" size="lg" onClick={() => setCurrentView('register')} className="w-full sm:w-auto flex items-center space-x-2">
             <Play className="h-4 w-4 fill-white text-white" />
             <span>Book a Demo</span>
           </Button>

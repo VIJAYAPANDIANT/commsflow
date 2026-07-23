@@ -156,6 +156,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               <span className="text-[11px] font-bold text-slate-300">View Logs</span>
             </button>
             <button
+              onClick={() => setActiveTab('settings')}
               className="flex flex-col items-center justify-center p-4 bg-white/5 border border-white/5 rounded-xl hover:border-violet-500/30 hover:bg-white/10 transition-all text-center space-y-2 cursor-pointer"
             >
               <div className="w-9 h-9 rounded-lg bg-violet-600/10 border border-violet-500/20 flex items-center justify-center text-violet-400">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Code, LineChart, BadgeDollarSign, ArrowRight, Check } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { useNavigation } from '../../context/NavigationContext';
 
 interface SolutionTab {
   id: string;
@@ -15,6 +16,7 @@ interface SolutionTab {
 }
 
 export const IndustrySolutions: React.FC = () => {
+  const { setCurrentView } = useNavigation();
   const [activeTab, setActiveTab] = useState('hr');
 
   const tabs: SolutionTab[] = [
@@ -263,7 +265,7 @@ export const IndustrySolutions: React.FC = () => {
                   </div>
 
                   <div className="pt-4 w-full">
-                    <Button variant="outline" size="sm" className="flex items-center space-x-2 group">
+                    <Button variant="outline" size="sm" onClick={() => setCurrentView('register')} className="flex items-center space-x-2 group">
                       <span>Explore workflow details</span>
                       <ArrowRight className="h-4.5 w-4.5 group-hover:translate-x-1 transition-transform" />
                     </Button>
