@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   User, Building2, Users, Palette, Moon, Bell, 
   Globe, HelpCircle, MessageSquare, Info, ShieldAlert,
-  Lock, Key, Copy, Trash2, Check
+  Lock, Unlock, Key, Copy, Trash2, Check
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useNavigation } from '../../context/NavigationContext';
@@ -653,10 +653,3 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ brandLocked, setBrandL
     </div>
   );
 };
-
-// Custom Unlock icon
-const Unlock = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-  </svg>
-);

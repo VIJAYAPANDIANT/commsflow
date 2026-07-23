@@ -5,7 +5,7 @@ import {
   Share2, History, Download, Save, Sparkles, X, 
   Check, LayoutGrid, Type, ImageIcon, Palette, Heart, 
   ChevronRight, Lock, ShieldCheck, CheckCircle2,
-  Trash2, Link2, Settings, Layers
+  Trash2, Link2, Settings, Layers, Folder
 } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
 import { Button } from '../ui/Button';
@@ -600,7 +600,7 @@ export const DocumentEditor: React.FC = () => {
           {/* Vertical Tabs bar */}
           <div className="w-16 border-r border-white/5 flex flex-col items-center py-4 space-y-4 bg-[#09090c]/40">
             {[
-              { id: 'categories' as const, label: 'Docs', icon: <FolderIcon className="h-4.5 w-4.5" /> },
+              { id: 'categories' as const, label: 'Docs', icon: <Folder className="h-4.5 w-4.5" /> },
               { id: 'blocks' as const, label: 'Blocks', icon: <LayoutGrid className="h-4.5 w-4.5" /> },
               { id: 'assets' as const, label: 'Assets', icon: <ImageIcon className="h-4.5 w-4.5" /> },
               { id: 'icons' as const, label: 'Icons', icon: <Type className="h-4.5 w-4.5" /> }, // using type for icon list
@@ -1013,10 +1013,3 @@ export const DocumentEditor: React.FC = () => {
     </div>
   );
 };
-
-// Lightweight custom icons to avoid duplicates
-const FolderIcon = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-  </svg>
-);
