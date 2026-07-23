@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Layers, Send, MessageSquare } from 'lucide-react';
+import { Layers, Send, MessageSquare, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigation } from '../../context/NavigationContext';
 
 export const Footer: React.FC = () => {
+  const { setCurrentView } = useNavigation();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activeTopic, setActiveTopic] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +48,223 @@ export const Footer: React.FC = () => {
       { name: 'Press Kit', href: 'https://github.com/VIJAYAPANDIANT' },
     ],
   };
+
+  const handleLinkClick = (e: React.MouseEvent, topic: string) => {
+    e.preventDefault();
+    setActiveTopic(topic);
+    setModalOpen(true);
+  };
+
+  const getTopicContent = (topic: string) => {
+    switch (topic) {
+      case 'About Us':
+        return {
+          title: "About CommsFlow AI",
+          subtitle: "Visual Document & Communication Studio",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                CommsFlow AI is a premium visual document editor designed to align organization-wide communications. We believe enterprise updates shouldn't feel fragmented, boring, or take hours to code.
+              </p>
+              <p>
+                With CommsFlow, departments like HR, Support, Operations, and Engineering drag-and-drop elements on a unified, on-brand canvas, ensuring absolute guidelines lockdown and direct responsive exporting.
+              </p>
+              <div className="pt-3 border-t border-white/5 flex items-center justify-between text-slate-500 text-[10px]">
+                <span>Creator & Developer: <strong>Vijayapandian T</strong></span>
+                <a href="https://www.linkedin.com/in/vijayapandian-t" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">Connect on LinkedIn</a>
+              </div>
+            </div>
+          )
+        };
+      case 'Careers':
+        return {
+          title: "Careers at CommsFlow",
+          subtitle: "Help us shape the future of visual builder pipelines",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left">
+              <p className="text-slate-300">
+                We are a product-first, fully remote engineering and design squad building the future of document layout builders.
+              </p>
+              <div className="space-y-2.5 pt-2">
+                {[
+                  { role: "Lead UI Engineer (React / Tailwind)", type: "Full-Time • Remote", salary: "$140k - $170k" },
+                  { role: "Visual Canvas Editor Architect", type: "Full-Time • Remote", salary: "$150k - $190k" },
+                  { role: "Developer Relations Specialist", type: "Contract • Remote", salary: "$80k - $100k" },
+                ].map((job, idx) => (
+                  <div key={idx} className="p-3 bg-white/5 border border-white/5 rounded-xl flex justify-between items-center hover:border-violet-500/20 transition-colors">
+                    <div className="text-left">
+                      <div className="font-bold text-white font-heading">{job.role}</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{job.type}</div>
+                    </div>
+                    <span className="text-[10px] font-mono text-violet-400 font-semibold">{job.salary}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        };
+      case 'Blog':
+        return {
+          title: "CommsFlow Engineering Blog",
+          subtitle: "Latest release notes, editor engineering, and brand guides updates",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left">
+              <div className="space-y-3.5">
+                {[
+                  { title: "The Death of Raw HTML Code in Newsletters", date: "July 20, 2026", desc: "Why writing custom email tables in 2026 is a massive waste of developer hours." },
+                  { title: "How Brand kit Guardrails Saves Corporate Credibility", date: "June 14, 2026", desc: "Locking fonts and colors globally reduces visual errors and enforces corporate guidelines." },
+                  { title: "Visual Builders vs. Document Version Snapshots", date: "May 28, 2026", desc: "How client-side draft auto-saves and rollback timelines optimize layout revisions." },
+                ].map((post, idx) => (
+                  <div key={idx} className="p-3 bg-white/5 border border-white/5 rounded-xl space-y-1 hover:border-violet-500/20 transition-colors text-left cursor-pointer">
+                    <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                      <span>{post.date}</span>
+                      <span className="text-violet-400 font-mono">Read Post</span>
+                    </div>
+                    <h4 className="text-xs font-bold text-white font-heading mt-0.5">{post.title}</h4>
+                    <p className="text-[10px] text-slate-400 leading-snug">{post.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        };
+      case 'Security Policy':
+        return {
+          title: "Enterprise Security Policy",
+          subtitle: "SOC2 Compliance, Guardrails Lockdown, and Data Encryption",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                CommsFlow operates on a **zero-trust client-side workspace model**. We prioritize data containment and identity security:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li>**Local Processing:** Templates, data bindings, and layouts are processed directly in your local browser sandbox.</li>
+                <li>**Branding Lockdown:** Admins can enforce global HEX restrictions, preventing custom style overrides.</li>
+                <li>**Secure APIs:** API keys and pipeline webhooks are cryptographically locked in browser LocalStorage.</li>
+              </ul>
+              <p className="text-slate-500 text-[10px] pt-1">
+                For complete SOC2 audit logs or reporting vulnerabilities, please contact: <a href="mailto:vijayapandian112007@gmail.com" className="text-violet-400 hover:underline">vijayapandian112007@gmail.com</a>
+              </p>
+            </div>
+          )
+        };
+      case 'Press Kit':
+        return {
+          title: "Branding & Press Kit",
+          subtitle: "Vector assets, logos, and media guidelines",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                Our press kit includes approved media assets, high-res visual mockups, and corporate guidelines vectors to showcase CommsFlow AI in publications.
+              </p>
+              <div className="p-4 bg-white/5 border border-white/5 rounded-xl space-y-3.5 text-center">
+                <div className="text-[11px] font-bold text-slate-400">CommsFlow Vector Assets Package (2.4 MB)</div>
+                <button onClick={() => alert('Download triggered successfully.')} className="px-4 py-1.5 bg-violet-600 hover:bg-violet-500 transition-colors text-[10px] font-bold uppercase tracking-wider text-white rounded-md cursor-pointer">
+                  Download Assets ZIP
+                </button>
+              </div>
+              <p className="text-[10px] text-slate-500">
+                Please adhere to our brand guide guidelines (locked colors and Outfit fonts) when utilizing our vectors.
+              </p>
+            </div>
+          )
+        };
+      case 'Privacy Policy':
+        return {
+          title: "Privacy Policy Guidelines",
+          subtitle: "Client-only visual processing declaration",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                Your privacy is paramount. CommsFlow AI is built on a **local-first visual architecture**. 
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li>We do **not** transmit your template copy, newsletters, billing tables, or layout data to external servers.</li>
+                <li>Workspace folders, active tab configurations, and draft saves reside solely in your browser storage.</li>
+                <li>Cookie trackers are completely disabled across our visual editor console.</li>
+              </ul>
+              <p className="text-[10px] text-slate-500 font-mono">
+                Created and audited under compliance regulations. For questions, email: <a href="mailto:vijayapandian112007@gmail.com" className="text-violet-400 hover:underline">vijayapandian112007@gmail.com</a>
+              </p>
+            </div>
+          )
+        };
+      case 'Terms of Service':
+        return {
+          title: "Terms of Service Agreement",
+          subtitle: "Fair-use document visual editor guidelines",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                By accessing the CommsFlow document builder and studio workspaces, you agree to our standard terms of use:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li>**Workspace Ownership:** You retain full copyrights for any compiled HTML, Markdown, or PDF newsletters exported from our editor.</li>
+                <li>**Brand Lockdown:** You agree not to reverse-engineer color restrictions set by your workspace administrator.</li>
+                <li>**No Liability:** Because templates are processed client-side, CommsFlow is not responsible for any data loss occurring from cleared browser caches.</li>
+              </ul>
+            </div>
+          )
+        };
+      case 'GDPR compliance':
+        return {
+          title: "GDPR Compliance Registry",
+          subtitle: "User privacy, rights, and local containment data nodes",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                CommsFlow AI is fully aligned with the **General Data Protection Regulation (GDPR)**:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li>**Right to Erasure:** Because all workspace configurations, history logs, and layout drafts are stored inside your browser's local sandbox, clearing your history completely deletes all your data from the universe.</li>
+                <li>**Data Containment:** We do not collect, process, or sell personal identifiable information (PII).</li>
+                <li>**Consent:** No marketing cookie trackers are injected into active editing canvas layers.</li>
+              </ul>
+            </div>
+          )
+        };
+      case 'Help Center':
+      case 'Documentation':
+      case 'Design Templates':
+      case 'Email Best Practices':
+      case 'System Status':
+        return {
+          title: `${topic} Resource Portal`,
+          subtitle: "Self-serve support documentation & guides",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+              <p>
+                Welcome to our self-serve resource hub. Here you can find standard guidance on styling layouts, automating email deployments, and locking down corporate branding rules.
+              </p>
+              <div className="p-3 bg-white/5 border border-white/5 rounded-xl space-y-2">
+                <div className="font-bold text-white font-heading">Quick FAQ Accordion</div>
+                <div className="text-[11px] text-slate-400 leading-relaxed">
+                  To lockdown branding guidelines, navigate to **Studio Settings &gt; Brand Kit** and toggle **Enforce Global Palette Rules**. This prevents contributors from using custom colors or unauthorized fonts in the canvas editor.
+                </div>
+              </div>
+            </div>
+          )
+        };
+      default:
+        return {
+          title: "Information Page",
+          subtitle: "CommsFlow Visual Studio",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: <p className="text-slate-300 text-xs">Content is currently under revision. Please return shortly.</p>
+        };
+    }
+  };
+
+  const activeContent = getTopicContent(activeTopic);
 
   return (
     <footer className="relative border-t border-white/5 bg-[#030303]/60 backdrop-blur-md z-10 pt-16 pb-8 px-6 overflow-hidden">
@@ -116,9 +337,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-xs text-slate-400 hover:text-white transition-colors">
+                  <button 
+                    onClick={() => setCurrentView('register')} 
+                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                  >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -140,7 +364,11 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-xs text-slate-400 hover:text-white transition-colors">
+                  <a 
+                    href="#" 
+                    onClick={(e) => handleLinkClick(e, link.name)} 
+                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -152,7 +380,11 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-xs text-slate-400 hover:text-white transition-colors">
+                  <a 
+                    href={link.href} 
+                    onClick={(e) => handleLinkClick(e, link.name)} 
+                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -216,11 +448,64 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex space-x-4">
-          <a href="https://www.linkedin.com/in/vijayapandian-t" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
-          <a href="https://github.com/VIJAYAPANDIANT" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">Terms of Service</a>
-          <a href="https://x.com/Vijayapand33371" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">GDPR compliance</a>
+          <a href="#" onClick={(e) => handleLinkClick(e, 'Privacy Policy')} className="hover:text-slate-300 transition-colors cursor-pointer">Privacy Policy</a>
+          <a href="#" onClick={(e) => handleLinkClick(e, 'Terms of Service')} className="hover:text-slate-300 transition-colors cursor-pointer">Terms of Service</a>
+          <a href="#" onClick={(e) => handleLinkClick(e, 'GDPR compliance')} className="hover:text-slate-300 transition-colors cursor-pointer">GDPR compliance</a>
         </div>
       </div>
+      {/* Dynamic Info Modal */}
+      <AnimatePresence>
+        {modalOpen && activeContent && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+            {/* Backdrop */}
+            <div className="fixed inset-0 bg-[#030303]/85 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
+            
+            {/* Modal Box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-lg relative z-10 glass-card rounded-2xl border border-white/10 p-6 md:p-8 bg-[#09090c] shadow-2xl space-y-5"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-violet-600/10 border border-violet-500/20 flex items-center justify-center text-violet-400 shrink-0">
+                    {activeContent.icon}
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-sm font-extrabold text-white font-heading">{activeContent.title}</h3>
+                    <p className="text-[10px] text-slate-500 mt-0.5">{activeContent.subtitle}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="p-1 rounded text-slate-500 hover:text-white hover:bg-white/5 transition-colors cursor-pointer shrink-0"
+                >
+                  <X className="h-4.5 w-4.5" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="overflow-y-auto max-h-[360px] no-scrollbar">
+                {activeContent.content}
+              </div>
+
+              {/* Actions Footer */}
+              <div className="flex justify-end pt-3 border-t border-white/5">
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="px-4 py-1.5 bg-white/5 hover:bg-white/10 text-white rounded-lg text-xs font-semibold cursor-pointer border border-white/5"
+                >
+                  Dismiss Guide
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </footer>
   );
 };
