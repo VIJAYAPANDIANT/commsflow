@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
 import { Button } from '../ui/Button';
+import { AIChatbot } from './AIChatbot';
 
 // Left sidebar tab options
 type LeftTab = 'categories' | 'blocks' | 'assets' | 'icons' | 'brand';
@@ -1003,6 +1004,11 @@ export const DocumentEditor: React.FC = () => {
         )}
 
       </AnimatePresence>
+
+      <AIChatbot 
+        templateTitle={editingTemplate?.title || "Standard Layout"} 
+        templateCategory={editingTemplate?.category || "Email"} 
+      />
 
     </div>
   );
