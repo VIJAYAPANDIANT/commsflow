@@ -8,7 +8,8 @@ export type AuthView =
   | 'reset-password' 
   | 'verify-email' 
   | 'dashboard'
-  | 'editor';
+  | 'editor'
+  | '404';
 
 export interface EditorTemplate {
   id: string;
