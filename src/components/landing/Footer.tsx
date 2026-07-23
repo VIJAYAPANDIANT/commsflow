@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Layers, Send, MessageSquare, X, 
   Building2, Briefcase, BookOpen, ShieldCheck, 
@@ -58,6 +58,40 @@ export const Footer: React.FC = () => {
     e.preventDefault();
     setActiveTopic(topic);
     setModalOpen(true);
+    
+    // Push visual state to browser history
+    const hash = `#modal-${topic.toLowerCase().replace(/\s+/g, '-')}`;
+    if (window.location.hash !== hash) {
+      window.history.pushState({ modalTopic: topic }, '', hash);
+    }
+  };
+
+  // Listen to popstate event (e.g. browser back button click)
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      // If we popped out of the modal hash, close the modal
+      if (!window.location.hash.startsWith('#modal-')) {
+        setModalOpen(false);
+      } else if (event.state && event.state.modalTopic) {
+        // If they went back to a previous topic modal, switch to it!
+        setActiveTopic(event.state.modalTopic);
+        setModalOpen(true);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  // Handle manual dismiss close action
+  const handleDismiss = () => {
+    setModalOpen(false);
+    // If the hash is still set to a modal, go back in history to clean it up
+    if (window.location.hash.startsWith('#modal-')) {
+      window.history.back();
+    }
   };
 
   const getTopicContent = (topic: string) => {
@@ -649,7 +683,7 @@ export const Footer: React.FC = () => {
         {modalOpen && activeContent && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
             {/* Backdrop */}
-            <div className="fixed inset-0 bg-[#030303]/85 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
+            <div className="fixed inset-0 bg-[#030303]/85 backdrop-blur-sm" onClick={handleDismiss} />
             
             {/* Modal Box */}
             <motion.div
@@ -671,7 +705,7 @@ export const Footer: React.FC = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => setModalOpen(false)}
+                  onClick={handleDismiss}
                   className="p-1 rounded text-slate-500 hover:text-white hover:bg-white/5 transition-colors cursor-pointer shrink-0"
                 >
                   <X className="h-4.5 w-4.5" />
@@ -686,7 +720,7 @@ export const Footer: React.FC = () => {
               {/* Actions Footer */}
               <div className="flex justify-end pt-3 border-t border-white/5">
                 <button
-                  onClick={() => setModalOpen(false)}
+                  onClick={handleDismiss}
                   className="px-4 py-1.5 bg-white/5 hover:bg-white/10 text-white rounded-lg text-xs font-semibold cursor-pointer border border-white/5"
                 >
                   Dismiss Guide
