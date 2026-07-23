@@ -25,25 +25,42 @@ export const Dashboard: React.FC = () => {
 
   // Unified Templates State
   const [templates, setTemplates] = useState<TemplateItem[]>([
-    // Marketing templates
-    { id: 'm-1', title: 'Summer Product Campaign Release', category: 'email', updated: '2 hours ago', pinned: true, favorite: false, workspace: 'marketing' },
-    { id: 'm-2', title: 'Monthly Lead Newsletter Update', category: 'email', updated: '1 day ago', pinned: false, favorite: true, workspace: 'marketing' },
-    { id: 'm-3', title: 'August Discount Voucher Banner', category: 'billing', updated: '4 days ago', pinned: false, favorite: false, workspace: 'marketing' },
+    // Engineering templates
+    { id: 'eng-1', title: 'Release Notes V3.0', category: 'Release Notes', updated: '2 hours ago', pinned: true, favorite: false, workspace: 'engineering', previewColor: 'from-blue-600/30 to-indigo-600/30' },
+    { id: 'eng-2', title: 'API Changelog Layout', category: 'API Changelog', updated: '1 day ago', pinned: false, favorite: true, workspace: 'engineering', previewColor: 'from-slate-700/30 to-slate-900/30' },
+    { id: 'eng-3', title: 'Weekly Sprint Summary', category: 'Sprint Summary', updated: '4 days ago', pinned: false, favorite: false, workspace: 'engineering', previewColor: 'from-cyan-600/30 to-blue-600/30' },
+    { id: 'eng-4', title: 'INC-901 Incident Resolution', category: 'Incident Report', updated: '1 week ago', pinned: true, favorite: true, workspace: 'engineering', previewColor: 'from-red-600/30 to-rose-600/30' },
+    { id: 'eng-5', title: 'Scheduled System Maintenance', category: 'Maintenance Notification', updated: '2 weeks ago', pinned: false, favorite: false, workspace: 'engineering', previewColor: 'from-orange-600/30 to-amber-600/30' },
     
     // HR templates
-    { id: 'h-1', title: 'Health Insurance Plan Details', category: 'document', updated: '3 days ago', pinned: true, favorite: true, workspace: 'hr' },
-    { id: 'h-2', title: 'Corporate Work-from-Home Policy', category: 'document', updated: '1 week ago', pinned: false, favorite: false, workspace: 'hr' },
-    { id: 'h-3', title: 'Q3 Townhall Meeting Invitation', category: 'email', updated: '2 weeks ago', pinned: false, favorite: false, workspace: 'hr' },
-
-    // Dev templates
-    { id: 'd-1', title: 'INC-889 Database Failure Failover', category: 'incident', updated: 'Just now', pinned: true, favorite: true, workspace: 'dev' },
-    { id: 'd-2', title: 'Release Changelog Version 2.4.0', category: 'document', updated: '3 days ago', pinned: false, favorite: false, workspace: 'dev' },
-    { id: 'd-3', title: 'API Gateway Timeout Incident Log', category: 'incident', updated: '5 days ago', pinned: false, favorite: false, workspace: 'dev' },
+    { id: 'hr-1', title: 'Senior Engineer Offer Letter', category: 'Offer Letter', updated: '3 days ago', pinned: true, favorite: true, workspace: 'hr', previewColor: 'from-violet-600/30 to-fuchsia-600/30' },
+    { id: 'hr-2', title: 'Employment Certificate Log', category: 'Experience Certificate', updated: '1 week ago', pinned: false, favorite: false, workspace: 'hr', previewColor: 'from-indigo-600/30 to-purple-600/30' },
+    { id: 'hr-3', title: 'Standard Joining Letter', category: 'Joining Letter', updated: '2 weeks ago', pinned: false, favorite: false, workspace: 'hr', previewColor: 'from-pink-600/30 to-rose-600/30' },
+    { id: 'hr-4', title: 'Summer Internship Agreement', category: 'Internship Letter', updated: '1 month ago', pinned: false, favorite: false, workspace: 'hr', previewColor: 'from-fuchsia-600/30 to-pink-600/30' },
 
     // Finance templates
-    { id: 'f-1', title: 'Acme Corp Subscription Invoice', category: 'billing', updated: '1 day ago', pinned: true, favorite: false, workspace: 'finance' },
-    { id: 'f-2', title: 'Enterprise Cost Quotation Sheet', category: 'billing', updated: '3 days ago', pinned: false, favorite: true, workspace: 'finance' },
-    { id: 'f-3', title: 'Stripe API Webhook Receipt Layout', category: 'billing', updated: '1 week ago', pinned: false, favorite: false, workspace: 'finance' },
+    { id: 'fin-1', title: 'Monthly Subscription Invoice', category: 'Invoice', updated: '1 day ago', pinned: true, favorite: false, workspace: 'finance', previewColor: 'from-emerald-600/30 to-teal-600/30' },
+    { id: 'fin-2', title: 'Corporate Payment Receipt', category: 'Receipt', updated: '3 days ago', pinned: false, favorite: true, workspace: 'finance', previewColor: 'from-green-600/30 to-emerald-600/30' },
+    { id: 'fin-3', title: 'Service Quotation Sheet', category: 'Quotation', updated: '1 week ago', pinned: false, favorite: false, workspace: 'finance', previewColor: 'from-teal-600/30 to-cyan-600/30' },
+    { id: 'fin-4', title: 'Bulk Hardware Purchase Order', category: 'Purchase Order', updated: '3 weeks ago', pinned: false, favorite: false, workspace: 'finance', previewColor: 'from-emerald-600/30 to-green-600/30' },
+
+    // Marketing templates
+    { id: 'mkt-1', title: 'Weekly Engagement Newsletter', category: 'Newsletter', updated: '1 day ago', pinned: true, favorite: false, workspace: 'marketing', previewColor: 'from-violet-600/30 to-indigo-600/30' },
+    { id: 'mkt-2', title: 'Summer Launch Campaign Announcement', category: 'Campaign Email', updated: '3 days ago', pinned: false, favorite: true, workspace: 'marketing', previewColor: 'from-indigo-600/30 to-purple-600/30' },
+    { id: 'mkt-3', title: 'Exclusive Promotional Voucher', category: 'Promotional Email', updated: '1 week ago', pinned: false, favorite: false, workspace: 'marketing', previewColor: 'from-fuchsia-600/30 to-pink-600/30' },
+    { id: 'mkt-4', title: 'Corporate Brand Announcement', category: 'Announcement', updated: '3 weeks ago', pinned: false, favorite: false, workspace: 'marketing', previewColor: 'from-purple-600/30 to-violet-600/30' },
+
+    // Support templates
+    { id: 'sup-1', title: 'Technical Issue Resolution Guide', category: 'Issue Resolution Email', updated: '2 days ago', pinned: true, favorite: false, workspace: 'support', previewColor: 'from-blue-600/30 to-cyan-600/30' },
+    { id: 'sup-2', title: 'Service Interruption Update', category: 'Customer Update', updated: '4 days ago', pinned: false, favorite: true, workspace: 'support', previewColor: 'from-cyan-600/30 to-teal-600/30' },
+    { id: 'sup-3', title: 'Subscription Refund Confirmation', category: 'Refund Letter', updated: '1 week ago', pinned: false, favorite: false, workspace: 'support', previewColor: 'from-teal-600/30 to-emerald-600/30' },
+    { id: 'sup-4', title: 'System Outage Apology Letter', category: 'Apology Letter', updated: '2 weeks ago', pinned: false, favorite: false, workspace: 'support', previewColor: 'from-rose-600/30 to-red-600/30' },
+
+    // Operations templates
+    { id: 'ops-1', title: 'Monthly Progress Project Report', category: 'Project Report', updated: '3 days ago', pinned: true, favorite: false, workspace: 'operations', previewColor: 'from-slate-600/30 to-zinc-600/30' },
+    { id: 'ops-2', title: 'Quarterly Board Meeting Minutes', category: 'Meeting Minutes', updated: '1 week ago', pinned: false, favorite: true, workspace: 'operations', previewColor: 'from-zinc-700/30 to-slate-700/30' },
+    { id: 'ops-3', title: 'Operational Executive Summary', category: 'Executive Summary', updated: '2 weeks ago', pinned: false, favorite: false, workspace: 'operations', previewColor: 'from-slate-700/30 to-neutral-700/30' },
+    { id: 'ops-4', title: 'GDPR Compliance Verification Audit', category: 'Compliance Report', updated: '1 month ago', pinned: false, favorite: false, workspace: 'operations', previewColor: 'from-neutral-600/30 to-zinc-600/30' },
   ]);
 
   const togglePin = (id: string) => {
@@ -52,6 +69,26 @@ export const Dashboard: React.FC = () => {
 
   const toggleFavorite = (id: string) => {
     setTemplates(prev => prev.map(t => t.id === id ? { ...t, favorite: !t.favorite } : t));
+  };
+
+  const duplicateTemplate = (id: string) => {
+    setTemplates(prev => {
+      const target = prev.find(t => t.id === id);
+      if (!target) return prev;
+      const copy: TemplateItem = {
+        ...target,
+        id: `temp-copy-${Date.now()}`,
+        title: `${target.title} (Copy)`,
+        updated: 'Just now',
+        pinned: false,
+        favorite: false,
+      };
+      return [copy, ...prev];
+    });
+  };
+
+  const deleteTemplate = (id: string) => {
+    setTemplates(prev => prev.filter(t => t.id !== id));
   };
 
   const renderActiveTabContent = () => {
@@ -63,6 +100,8 @@ export const Dashboard: React.FC = () => {
             setTemplates={setTemplates}
             togglePin={togglePin}
             toggleFavorite={toggleFavorite}
+            duplicateTemplate={duplicateTemplate}
+            deleteTemplate={deleteTemplate}
             workspace={activeWorkspace}
             searchQuery={searchQuery}
           />

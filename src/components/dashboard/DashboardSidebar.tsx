@@ -3,7 +3,7 @@ import { Layers, Layout, Folder, BarChart3, Clock, Settings, ChevronDown, LogOut
 import { useNavigation } from '../../context/NavigationContext';
 
 export type TabType = 'overview' | 'templates' | 'analytics' | 'activities' | 'settings';
-export type WorkspaceType = 'marketing' | 'hr' | 'dev' | 'finance';
+export type WorkspaceType = 'engineering' | 'hr' | 'finance' | 'marketing' | 'support' | 'operations';
 
 interface DashboardSidebarProps {
   activeTab: TabType;
@@ -24,10 +24,12 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const [workspaceOpen, setWorkspaceOpen] = useState(false);
 
   const workspaces = [
-    { id: 'marketing' as const, name: 'Marketing Hub', desc: 'Campaigns & Newsletters' },
+    { id: 'engineering' as const, name: 'Engineering Hub', desc: 'Changelogs & Alert Nodes' },
     { id: 'hr' as const, name: 'HR & Legal', desc: 'Announcements & Policies' },
-    { id: 'dev' as const, name: 'Engineering Docs', desc: 'Changelogs & Incidents' },
     { id: 'finance' as const, name: 'Finance & Billing', desc: 'Invoices & Quotations' },
+    { id: 'marketing' as const, name: 'Marketing Hub', desc: 'Campaigns & Newsletters' },
+    { id: 'support' as const, name: 'Customer Support', desc: 'Resolutions & Updates' },
+    { id: 'operations' as const, name: 'Operations Reports', desc: 'Logs & Minutes' },
   ];
 
   const currentWorkspaceInfo = workspaces.find(w => w.id === activeWorkspace) || workspaces[0];

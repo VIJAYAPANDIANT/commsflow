@@ -5,11 +5,12 @@ import type { TabType, WorkspaceType } from './DashboardSidebar';
 export interface TemplateItem {
   id: string;
   title: string;
-  category: 'email' | 'document' | 'incident' | 'billing';
+  category: string;
   updated: string;
   pinned: boolean;
   favorite: boolean;
   workspace: WorkspaceType;
+  previewColor: string;
 }
 
 interface OverviewTabProps {
