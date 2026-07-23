@@ -182,21 +182,34 @@ export const Footer: React.FC = () => {
       case 'Privacy Policy':
         return {
           title: "Privacy Policy Guidelines",
-          subtitle: "Client-only visual processing declaration",
+          subtitle: "Client-only visual processing & local containment",
           icon: <FileText className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
-                Your privacy is paramount. CommsFlow AI is built on a **local-first visual architecture**. 
+                Your privacy is paramount. CommsFlow AI is built on a <strong>local-first visual architecture</strong>. This policy outlines how your layout, settings, and workspace data are contained.
               </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
-                <li>We do **not** transmit your template copy, newsletters, billing tables, or layout data to external servers.</li>
-                <li>Workspace folders, active tab configurations, and draft saves reside solely in your browser storage.</li>
-                <li>Cookie trackers are completely disabled across our visual editor console.</li>
-              </ul>
-              <p className="text-[10px] text-slate-500 font-mono">
-                Created and audited under compliance regulations. For questions, email: <a href="mailto:vijayapandian112007@gmail.com" className="text-violet-400 hover:underline">vijayapandian112007@gmail.com</a>
-              </p>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">1. Information We Process</h4>
+                <p className="text-slate-400 text-[11px]">
+                  All templates, variables, HTML files, brand kits, and copy are processed locally in your browser sandbox. We do not transmit or store your drafts on any external server.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">2. Browser LocalStorage</h4>
+                <p className="text-slate-400 text-[11px]">
+                  We utilize your browser's local cache (LocalStorage and IndexedDB) to auto-save layout revisions, API keys, and workspace folder structures.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">3. Third-Party Integrations</h4>
+                <p className="text-slate-400 text-[11px]">
+                  If you connect delivery pipelines (e.g. SMTP webhooks), credentials are encrypted and stored locally. Transactions flow directly from your client machine to target hosts.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-white/5 text-[10px] text-slate-500 font-mono">
+                Audit Registry Contact: <a href="mailto:vijayapandian112007@gmail.com" className="text-violet-400 hover:underline">vijayapandian112007@gmail.com</a>
+              </div>
             </div>
           )
         };
@@ -208,13 +221,26 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
-                By accessing the CommsFlow document builder and studio workspaces, you agree to our standard terms of use:
+                By accessing the CommsFlow document builder and studio workspaces, you agree to comply with our global service terms:
               </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
-                <li>**Workspace Ownership:** You retain full copyrights for any compiled HTML, Markdown, or PDF newsletters exported from our editor.</li>
-                <li>**Brand Lockdown:** You agree not to reverse-engineer color restrictions set by your workspace administrator.</li>
-                <li>**No Liability:** Because templates are processed client-side, CommsFlow is not responsible for any data loss occurring from cleared browser caches.</li>
-              </ul>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">1. Workspace Ownership</h4>
+                <p className="text-slate-400 text-[11px]">
+                  You retain full ownership, copyright, and distribution rights for all compiled HTML, Markdown, and PDF assets generated through the visual builder.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">2. Brand Guardrails & Restrictions</h4>
+                <p className="text-slate-400 text-[11px]">
+                  Users agree not to bypass, disable, or reverse-engineer color restrictions or font constraints set by their workspace administrator.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">3. Limitation of Liability</h4>
+                <p className="text-slate-400 text-[11px]">
+                  Since data is stored client-side, CommsFlow is not liable for data loss due to cleared browser caches, hardware issues, or local database corruption.
+                </p>
+              </div>
             </div>
           )
         };
@@ -226,13 +252,26 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
-                CommsFlow AI is fully aligned with the **General Data Protection Regulation (GDPR)**:
+                CommsFlow AI is fully aligned with the <strong>General Data Protection Regulation (GDPR)</strong>.
               </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
-                <li>**Right to Erasure:** Because all workspace configurations, history logs, and layout drafts are stored inside your browser's local sandbox, clearing your history completely deletes all your data from the universe.</li>
-                <li>**Data Containment:** We do not collect, process, or sell personal identifiable information (PII).</li>
-                <li>**Consent:** No marketing cookie trackers are injected into active editing canvas layers.</li>
-              </ul>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">1. Right to Erasure (Article 17)</h4>
+                <p className="text-slate-400 text-[11px]">
+                  All configurations, drafts, and assets are contained locally. Clearing your browser cookies/site storage instantly deletes all personal data from the universe.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">2. Data Portability (Article 20)</h4>
+                <p className="text-slate-400 text-[11px]">
+                  You can export your workspace configuration schemas and design layouts as standard JSON files to import elsewhere.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-bold text-white font-heading">3. Data Controller Contact</h4>
+                <p className="text-slate-400 text-[11px]">
+                  For requests related to data access, modification, or erasure validation, please email the controller at: <a href="mailto:vijayapandian112007@gmail.com" className="text-violet-400 hover:underline">vijayapandian112007@gmail.com</a>
+                </p>
+              </div>
             </div>
           )
         };
