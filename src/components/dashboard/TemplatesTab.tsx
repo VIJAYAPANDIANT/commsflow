@@ -5,8 +5,7 @@ import {
   Eye, Edit2, Copy, Trash2, Download, AlertTriangle, 
   Layers, FileText, CheckCircle2
 } from 'lucide-react';
-import type { TemplateItem } from './OverviewTab';
-import type { WorkspaceType } from './DashboardSidebar';
+import type { TemplateItem, WorkspaceType } from '../../types';
 import { Button } from '../ui/Button';
 import { useNavigation } from '../../context/NavigationContext';
 

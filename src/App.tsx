@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedBackground } from './components/landing/AnimatedBackground';
 import { Navbar } from './components/landing/Navbar';
 import { Hero } from './components/landing/Hero';
@@ -61,33 +62,50 @@ const LandingPage = () => {
 const AppContent = () => {
   const { currentView } = useNavigation();
 
-  switch (currentView) {
-    case 'login':
-      return <Login />;
-    case 'register':
-      return <Register />;
-    case 'forgot-password':
-      return <ForgotPassword />;
-    case 'reset-password':
-      return <ResetPassword />;
-    case 'verify-email':
-      return <VerifyEmail />;
-    case 'dashboard':
-      return <Dashboard />;
-    case 'editor':
-      return <DocumentEditor />;
-    case '404':
-      return <NotFound />;
-    case 'landing':
-    default:
-      return (
-        <div className="relative min-h-screen text-slate-100 selection:bg-violet-600/30 selection:text-white">
-          {/* Dynamic Animated Ambient Background */}
-          <AnimatedBackground />
-          <LandingPage />
-        </div>
-      );
-  }
+  const renderView = () => {
+    switch (currentView) {
+      case 'login':
+        return <Login />;
+      case 'register':
+        return <Register />;
+      case 'forgot-password':
+        return <ForgotPassword />;
+      case 'reset-password':
+        return <ResetPassword />;
+      case 'verify-email':
+        return <VerifyEmail />;
+      case 'dashboard':
+        return <Dashboard />;
+      case 'editor':
+        return <DocumentEditor />;
+      case '404':
+        return <NotFound />;
+      case 'landing':
+      default:
+        return (
+          <div className="relative min-h-screen text-slate-100 selection:bg-violet-600/30 selection:text-white">
+            {/* Dynamic Animated Ambient Background */}
+            <AnimatedBackground />
+            <LandingPage />
+          </div>
+        );
+    }
+  };
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentView}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
+        className="min-h-screen flex flex-col"
+      >
+        {renderView()}
+      </motion.div>
+    </AnimatePresence>
+  );
 };
 
 function App() {

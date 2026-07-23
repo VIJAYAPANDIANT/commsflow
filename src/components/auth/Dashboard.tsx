@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { DashboardSidebar, type TabType, type WorkspaceType } from '../dashboard/DashboardSidebar';
-import { DashboardHeader, type NotificationItem } from '../dashboard/DashboardHeader';
-import { OverviewTab, type TemplateItem } from '../dashboard/OverviewTab';
+import { DashboardSidebar, type TabType } from '../dashboard/DashboardSidebar';
+import { DashboardHeader } from '../dashboard/DashboardHeader';
+import { OverviewTab } from '../dashboard/OverviewTab';
 import { TemplatesTab } from '../dashboard/TemplatesTab';
 import { AnalyticsTab } from '../dashboard/AnalyticsTab';
 import { ActivitiesTab } from '../dashboard/ActivitiesTab';
 import { SettingsTab } from '../dashboard/SettingsTab';
+import type { TemplateItem, WorkspaceType, NotificationItem } from '../../types';
 
 export const Dashboard: React.FC = () => {
 

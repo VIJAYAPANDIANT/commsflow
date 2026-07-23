@@ -1,17 +1,7 @@
 import React from 'react';
 import { Plus, ScrollText, Pin, Star, FileText, UserPlus, Lock } from 'lucide-react';
-import type { TabType, WorkspaceType } from './DashboardSidebar';
-
-export interface TemplateItem {
-  id: string;
-  title: string;
-  category: string;
-  updated: string;
-  pinned: boolean;
-  favorite: boolean;
-  workspace: WorkspaceType;
-  previewColor: string;
-}
+import type { TabType } from './DashboardSidebar';
+import type { TemplateItem, WorkspaceType } from '../../types';
 
 interface OverviewTabProps {
   setActiveTab: (tab: TabType) => void;

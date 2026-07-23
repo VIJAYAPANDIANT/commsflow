@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Layers, Layout, Folder, BarChart3, Clock, Settings, ChevronDown, LogOut, Check, Building2, ShieldCheck } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
 
+import type { WorkspaceType } from '../../types';
+
 export type TabType = 'overview' | 'templates' | 'analytics' | 'activities' | 'settings';
-export type WorkspaceType = 'engineering' | 'hr' | 'finance' | 'marketing' | 'support' | 'operations';
 
 interface DashboardSidebarProps {
   activeTab: TabType;

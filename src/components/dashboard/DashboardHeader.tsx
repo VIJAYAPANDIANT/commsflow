@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { Search, Bell, User, LogOut, Settings, HelpCircle } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
 
-export interface NotificationItem {
-  id: string;
-  title: string;
-  desc: string;
-  time: string;
-  read: boolean;
-}
+import type { NotificationItem } from '../../types';
 
 interface DashboardHeaderProps {
   searchQuery: string;
