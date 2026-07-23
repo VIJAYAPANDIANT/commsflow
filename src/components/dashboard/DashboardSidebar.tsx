@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Layers, Layout, Folder, BarChart3, Clock, Settings, ChevronDown, LogOut, Check, Building2, ShieldCheck } from 'lucide-react';
+import { Layout, Folder, BarChart3, Clock, Settings, ChevronDown, LogOut, Check, Building2, ShieldCheck } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
+import { Logo } from '../ui/Logo';
 
 import type { WorkspaceType } from '../../types';
 
@@ -54,8 +55,8 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         
         {/* Brand Logo */}
         <div className="flex items-center space-x-2.5 px-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-premium flex items-center justify-center shadow-lg shadow-violet-500/20">
-            <Layers className="w-4.5 h-4.5 text-white" />
+          <div className="w-8 h-8 flex items-center justify-center">
+            <Logo className="w-7 h-7" />
           </div>
           <span className="font-heading font-extrabold text-base tracking-tight text-white flex items-center">
             Comms<span className="text-violet-400">Flow</span>

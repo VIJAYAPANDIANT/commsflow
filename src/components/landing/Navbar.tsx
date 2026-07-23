@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Layers } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useNavigation } from '../../context/NavigationContext';
+import { Logo } from '../ui/Logo';
 
 export const Navbar: React.FC = () => {
   const { setCurrentView } = useNavigation();
@@ -11,7 +12,11 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -20,7 +25,6 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Features', href: '#features' },
     { name: 'Solutions', href: '#solutions' },
-    { name: 'Testimonials', href: '#testimonials' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' },
   ];
@@ -39,8 +43,8 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#" className="flex items-center space-x-2 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-premium flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:scale-105 transition-transform duration-300">
-            <Layers className="w-5 h-5 text-white" />
+          <div className="w-9 h-9 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+            <Logo className="w-8 h-8" />
           </div>
           <span className="font-heading font-extrabold text-xl tracking-tight text-white">
             Comms<span className="text-violet-400">Flow</span>

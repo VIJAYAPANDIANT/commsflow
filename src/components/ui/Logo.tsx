@@ -1,0 +1,52 @@
+import React from 'react';
+
+interface LogoProps {
+  className?: string;
+}
+
+export const Logo: React.FC<LogoProps> = ({ className = "h-6 w-6" }) => {
+  return (
+    <svg 
+      className={className} 
+      viewBox="0 0 32 32" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="cf-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#a78bfa" />
+          <stop offset="100%" stopColor="#7c3aed" />
+        </linearGradient>
+        <linearGradient id="cf-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#60a5fa" />
+          <stop offset="100%" stopColor="#2563eb" />
+        </linearGradient>
+      </defs>
+      {/* Intersecting loops representing Communication Flow */}
+      <path 
+        d="M10 14C10 9.58172 13.5817 6 18 6H24C28.4183 6 32 9.58172 32 14V16C32 20.4183 28.4183 24 24 24H18C13.5817 24 10 20.4183 10 16V14Z" 
+        fill="url(#cf-gradient-1)" 
+        fillOpacity="0.8"
+      />
+      <path 
+        d="M2 18C2 13.5817 5.58172 10 10 10H16C20.4183 10 24 13.5817 24 18V20C24 24.4183 20.4183 28 16 28H10C5.58172 28 2 24.4183 2 20V18Z" 
+        fill="url(#cf-gradient-2)" 
+        fillOpacity="0.85"
+        style={{ mixBlendMode: 'plus-lighter' }}
+      />
+      {/* Inner communication lines flow */}
+      <path 
+        d="M9 16H17" 
+        stroke="white" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+      <path 
+        d="M11 20H15" 
+        stroke="white" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};

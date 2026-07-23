@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation } from '../../context/NavigationContext';
+import { Logo } from '../ui/Logo';
 
 export const Footer: React.FC = () => {
   const { setCurrentView } = useNavigation();
@@ -495,8 +496,8 @@ export const Footer: React.FC = () => {
         {/* Brand Left Column */}
         <div className="md:col-span-4 flex flex-col space-y-6">
           <a href="#" className="flex items-center space-x-2 w-max">
-            <div className="w-8 h-8 rounded-lg bg-gradient-premium flex items-center justify-center">
-              <Layers className="w-4.5 h-4.5 text-white" />
+            <div className="w-8 h-8 flex items-center justify-center">
+              <Logo className="w-7.5 h-7.5" />
             </div>
             <span className="font-heading font-extrabold text-lg tracking-tight text-white">
               Comms<span className="text-violet-400">Flow</span>

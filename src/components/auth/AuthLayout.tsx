@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Layers } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigation } from '../../context/NavigationContext';
 import { AnimatedBackground } from '../landing/AnimatedBackground';
+import { Logo } from '../ui/Logo';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -46,9 +47,9 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title, subtitl
           <div className="flex flex-col items-center justify-center mb-8">
             <button
               onClick={() => setCurrentView('landing')}
-              className="w-10 h-10 rounded-lg bg-gradient-premium flex items-center justify-center shadow-lg shadow-violet-500/20 hover:scale-105 transition-transform duration-300 mb-4 cursor-pointer"
+              className="w-10 h-10 flex items-center justify-center hover:scale-105 transition-transform duration-300 mb-4 cursor-pointer"
             >
-              <Layers className="w-5.5 h-5.5 text-white" />
+              <Logo className="w-9 h-9" />
             </button>
             <h1 className="text-xl md:text-2xl font-bold text-white font-heading">{title}</h1>
             <p className="text-xs text-slate-400 mt-1">{subtitle}</p>
