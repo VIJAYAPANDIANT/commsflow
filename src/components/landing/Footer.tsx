@@ -231,25 +231,166 @@ export const Footer: React.FC = () => {
             </div>
           )
         };
-      case 'Help Center':
       case 'Documentation':
-      case 'Design Templates':
-      case 'Email Best Practices':
-      case 'System Status':
         return {
-          title: `${topic} Resource Portal`,
-          subtitle: "Self-serve support documentation & guides",
+          title: "Developer Documentation",
+          subtitle: "API references, visual builder integration & SDK guides",
           icon: <Layers className="h-5 w-5 text-violet-400" />,
           content: (
-            <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <p>
-                Welcome to our self-serve resource hub. Here you can find standard guidance on styling layouts, automating email deployments, and locking down corporate branding rules.
+                Get started with the CommsFlow developer tooling. Initialize workspaces programmatically or fetch compiled layouts via our REST endpoints.
               </p>
-              <div className="p-3 bg-white/5 border border-white/5 rounded-xl space-y-2">
-                <div className="font-bold text-white font-heading">Quick FAQ Accordion</div>
-                <div className="text-[11px] text-slate-400 leading-relaxed">
-                  To lockdown branding guidelines, navigate to **Studio Settings &gt; Brand Kit** and toggle **Enforce Global Palette Rules**. This prevents contributors from using custom colors or unauthorized fonts in the canvas editor.
+              <div className="space-y-2">
+                <div className="text-[10px] uppercase font-bold text-slate-500">1. Install CLI Tool</div>
+                <div className="bg-black/60 font-mono text-[10px] p-2.5 rounded-lg border border-white/5 text-violet-300">
+                  npm install -g @commsflow/cli
                 </div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-[10px] uppercase font-bold text-slate-500">2. Fetch Template Payload</div>
+                <div className="bg-black/60 font-mono text-[9px] p-2.5 rounded-lg border border-white/5 text-slate-400 overflow-x-auto">
+                  {`curl -X GET "https://api.commsflow.ai/v1/layouts" \\
+  -H "Authorization: Bearer YOUR_API_KEY"`}
+                </div>
+              </div>
+            </div>
+          )
+        };
+      case 'Design Templates':
+        return {
+          title: "Layout Design Templates",
+          subtitle: "Pre-made newsletter, invoice, and incident layouts",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <p>
+                Browse pre-approved visual templates designed to integrate instantly into your workspace folders:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                {[
+                  { name: "Incident Report", type: "Tech Ops", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+                  { name: "Monthly Billing", type: "Finance", color: "bg-emerald-500/10 text-green-400 border-emerald-500/20" },
+                  { name: "Release Notes", type: "Engineering", color: "bg-blue-500/10 text-blue-400 border-blue-500/20" },
+                  { name: "HR Bulletin", type: "Operations", color: "bg-purple-500/10 text-purple-400 border-purple-500/20" },
+                ].map((tpl, i) => (
+                  <div key={i} className="p-3 bg-white/5 border border-white/5 rounded-xl hover:border-violet-500/30 transition-colors">
+                    <div className="font-bold text-white font-heading">{tpl.name}</div>
+                    <span className={`inline-block px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider mt-1.5 border ${tpl.color}`}>
+                      {tpl.type}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        };
+      case 'Email Best Practices':
+        return {
+          title: "Email Delivery Guidelines",
+          subtitle: "Maximize open rates, improve layout scaling, and bypass spam blocks",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <p>
+                To ensure maximum delivery metrics across Gmail, Outlook, and Apple Mail, adhere to our compiled visual guidelines:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li><strong>Gmail Clipping Limits:</strong> Keep your final compiled HTML payload under <strong>102 KB</strong>.</li>
+                <li><strong>Image Ratios:</strong> Maintain a 60% text to 40% visual media ratio to bypass basic spam filtering algorithms.</li>
+                <li><strong>Typography Fallbacks:</strong> Always configure browser fallback families (e.g. system-ui, sans-serif) for custom Google Fonts.</li>
+              </ul>
+            </div>
+          )
+        };
+      case 'System Status':
+        return {
+          title: "CommsFlow Service Status",
+          subtitle: "Real-time health, rendering pipeline performance, and API status",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-green-500/10 border border-green-500/20">
+                <span className="font-bold text-green-400 font-heading">All Systems Operational</span>
+                <span className="h-2 w-2 rounded-full bg-green-500 animate-ping" />
+              </div>
+              <div className="space-y-2.5 pt-2">
+                {[
+                  { service: "Visual Canvas Editor Sandbox", status: "Operational" },
+                  { service: "HTML Rendering Pipeline", status: "Operational" },
+                  { service: "API Keys & Endpoint Webhooks", status: "Operational" },
+                  { service: "SMTP Target Connectors", status: "Operational" },
+                ].map((srv, idx) => (
+                  <div key={idx} className="flex justify-between items-center p-2.5 bg-white/5 border border-white/5 rounded-lg text-xs">
+                    <span className="text-slate-400 font-heading">{srv.service}</span>
+                    <span className="font-bold text-green-400">{srv.status}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        };
+      case 'Help Center':
+        return {
+          title: "Customer Help Center",
+          subtitle: "Frequently Asked Questions & visual editor guidance",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <div className="space-y-3.5">
+                {[
+                  { q: "How do I rollback layout modifications?", a: "Open your draft in the editor canvas, click the History icon in the top header, and select your preferred timestamp checkpoint to restore." },
+                  { q: "How do I lock brand guidelines globally?", a: "Navigate to Studio Settings &gt; Brand Kit, toggle Enforce Global Palette Rules. This restricts team members from altering approved accent swatches." },
+                  { q: "Can I connect SMTP pipeline hooks?", a: "Yes, generate custom API keys in the Security settings panel to pipe layout JSON directly into external webhooks." }
+                ].map((faq, idx) => (
+                  <div key={idx} className="p-3.5 bg-white/5 border border-white/5 rounded-xl space-y-1.5 text-left">
+                    <div className="font-bold text-white font-heading">{faq.q}</div>
+                    <p className="text-slate-400 text-[10px] leading-relaxed mt-0.5">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        };
+      case 'Analytics Hub':
+        return {
+          title: "Analytics Hub & Tracking",
+          subtitle: "Real-time delivery metrics, open rates, and bounce logs",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <p>
+                Measure the effectiveness of your enterprise notifications with our unified analytics pipeline:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+                <li><strong>Visual Heatmaps:</strong> Track exactly where recipients click or hover on your visual layouts.</li>
+                <li><strong>Read Duration Metrics:</strong> Understand user engagement by measuring average scroll read times.</li>
+                <li><strong>Bounces & Spam Logs:</strong> Receive alerts if newsletters trigger delivery filters.</li>
+              </ul>
+            </div>
+          )
+        };
+      case 'Changelog':
+        return {
+          title: "CommsFlow Product Changelog",
+          subtitle: "Recent visual editor updates and workspace enhancements",
+          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          content: (
+            <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
+              <div className="space-y-3.5">
+                {[
+                  { ver: "v3.2.0 — Interactive Modals Patch", date: "July 2026", note: "Integrated topic-related content guides directly into footer anchors. Standardized icon layouts." },
+                  { ver: "v3.1.0 — Tailwind v4 CSS Engine Upgrade", date: "July 2026", note: "Replaced base import loops with Tailwind v4 compilation hooks, improving site responsiveness by 30%." },
+                  { ver: "v3.0.0 — Social authentication", date: "June 2026", note: "Wired up Google, GitHub, and Microsoft social login buttons with simulated auth latencies." },
+                ].map((chg, idx) => (
+                  <div key={idx} className="p-3 bg-white/5 border border-white/5 rounded-xl space-y-1">
+                    <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                      <span className="text-violet-400 font-mono">{chg.ver}</span>
+                      <span>{chg.date}</span>
+                    </div>
+                    <p className="text-[10px] text-slate-300 leading-normal mt-0.5">{chg.note}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )
@@ -338,8 +479,14 @@ export const Footer: React.FC = () => {
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
                   <button 
-                    onClick={() => setCurrentView('register')} 
-                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+                    onClick={(e) => {
+                      if (link.name === 'Analytics Hub' || link.name === 'Changelog') {
+                        handleLinkClick(e, link.name);
+                      } else {
+                        setCurrentView('register');
+                      }
+                    }} 
+                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer text-left font-heading"
                   >
                     {link.name}
                   </button>
