@@ -66,6 +66,15 @@ export const Login: React.FC = () => {
     }
   };
 
+  const handleSocialLogin = (provider: string) => {
+    setIsLoading(true);
+    setTempEmail(`${provider.toLowerCase()}.user@commsflow.ai`);
+    setTimeout(() => {
+      setIsLoading(false);
+      setCurrentView('dashboard');
+    }, 1200);
+  };
+
   return (
     <AuthLayout title="Welcome back" subtitle="Sign in to your studio workspace">
       <form onSubmit={handleSubmit} className="space-y-5 text-left">
@@ -174,6 +183,7 @@ export const Login: React.FC = () => {
         <button
           type="button"
           aria-label="Google Login"
+          onClick={() => handleSocialLogin('Google')}
           className="flex items-center justify-center p-2.5 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-slate-300 hover:text-white cursor-pointer"
         >
           <svg className="h-4.5 w-4.5" viewBox="0 0 24 24">
@@ -183,6 +193,7 @@ export const Login: React.FC = () => {
         <button
           type="button"
           aria-label="GitHub Login"
+          onClick={() => handleSocialLogin('GitHub')}
           className="flex items-center justify-center p-2.5 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-slate-300 hover:text-white cursor-pointer"
         >
           <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
@@ -192,6 +203,7 @@ export const Login: React.FC = () => {
         <button
           type="button"
           aria-label="Microsoft Login"
+          onClick={() => handleSocialLogin('Microsoft')}
           className="flex items-center justify-center p-2.5 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-slate-300 hover:text-white cursor-pointer"
         >
           <svg className="h-4.5 w-4.5" viewBox="0 0 23 23">
