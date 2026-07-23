@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Plus, Pin, Star, Check, X, MoreVertical, 
   Eye, Edit2, Copy, Trash2, Download, AlertTriangle, 
-  Layout, Type, Image as ImageIcon, Layers, FileText, 
-  Monitor, Smartphone, Code, Terminal, CheckCircle2
+  Layers, FileText, CheckCircle2
 } from 'lucide-react';
 import type { TemplateItem } from './OverviewTab';
 import type { WorkspaceType } from './DashboardSidebar';
 import { Button } from '../ui/Button';
+import { useNavigation } from '../../context/NavigationContext';
 
 interface TemplatesTabProps {
   templates: TemplateItem[];
@@ -31,6 +31,7 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
   workspace,
   searchQuery,
 }) => {
+  const { setCurrentView, setEditingTemplate } = useNavigation();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
@@ -41,14 +42,8 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
 
   // Modal Detail states
   const [previewTemplate, setPreviewTemplate] = useState<TemplateItem | null>(null);
-  const [editTemplate, setEditTemplate] = useState<TemplateItem | null>(null);
   const [exportTemplate, setExportTemplate] = useState<TemplateItem | null>(null);
   const [deleteConfirmTemplate, setDeleteConfirmTemplate] = useState<TemplateItem | null>(null);
-
-  // Editor mock states
-  const [editorDevice, setEditorDevice] = useState<'desktop' | 'mobile'>('desktop');
-  const [editorSaving, setEditorSaving] = useState(false);
-  const [editorSuccess, setEditorSuccess] = useState(false);
 
   // Export mock states
   const [exportFormat, setExportFormat] = useState<'html' | 'pdf' | 'markdown'>('html');
@@ -138,17 +133,6 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
     setCreateModalOpen(false);
   };
 
-  const handleSaveEditor = () => {
-    setEditorSaving(true);
-    setTimeout(() => {
-      setEditorSaving(false);
-      setEditorSuccess(true);
-      setTimeout(() => {
-        setEditorSuccess(false);
-        setEditTemplate(null);
-      }, 1500);
-    }, 1200);
-  };
 
   const handleExportSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -496,10 +480,11 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
                             <Eye className="h-3.5 w-3.5 text-slate-400" />
                             <span>Preview Layout</span>
                           </button>
-                          <button
+                           <button
                             onClick={() => {
                               setActiveMenuId(null);
-                              setEditTemplate(temp);
+                              setEditingTemplate(temp);
+                              setCurrentView('editor');
                             }}
                             className="w-full flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-white/5 hover:text-white transition-colors text-left cursor-pointer"
                           >
@@ -654,7 +639,7 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
                 <Button variant="outline" size="sm" onClick={() => setPreviewTemplate(null)}>
                   Close Preview
                 </Button>
-                <Button variant="primary" size="sm" onClick={() => { setEditTemplate(previewTemplate); setPreviewTemplate(null); }}>
+                <Button variant="primary" size="sm" onClick={() => { setEditingTemplate(previewTemplate); setCurrentView('editor'); setPreviewTemplate(null); }}>
                   Open in Editor
                 </Button>
               </div>
@@ -662,150 +647,6 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({
           </div>
         )}
 
-        {/* 2. EDIT DIALOG MODAL (MOCK VISUAL BUILDER) */}
-        {editTemplate && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="fixed inset-0 bg-[#030303]/90 backdrop-blur-sm" onClick={() => setEditTemplate(null)} />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
-              className="w-full h-full max-h-[640px] max-w-5xl relative z-10 glass-card rounded-3xl border border-white/10 bg-[#070709] shadow-2xl flex flex-col justify-between overflow-hidden"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-[#09090c]/80">
-                <div className="flex items-center space-x-3">
-                  <div className="w-7 h-7 rounded-lg bg-gradient-premium flex items-center justify-center shrink-0">
-                    <Layers className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-xs font-bold text-white font-heading truncate max-w-xs">{editTemplate.title}</h3>
-                    <span className="text-[9px] text-slate-500 font-mono capitalize">{editTemplate.category} Editor Workspace</span>
-                  </div>
-                </div>
-
-                {/* Device Switcher */}
-                <div className="flex items-center bg-white/5 border border-white/5 p-1 rounded-xl space-x-1">
-                  <button
-                    onClick={() => setEditorDevice('desktop')}
-                    className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                      editorDevice === 'desktop' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
-                    }`}
-                  >
-                    <Monitor className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    onClick={() => setEditorDevice('mobile')}
-                    className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                      editorDevice === 'mobile' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
-                    }`}
-                  >
-                    <Smartphone className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-
-                <button
-                  onClick={() => setEditTemplate(null)}
-                  className="p-1 rounded text-slate-500 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
-                >
-                  <X className="h-4.5 w-4.5" />
-                </button>
-              </div>
-
-              {/* Designer Grid */}
-              <div className="flex-1 grid grid-cols-12 overflow-hidden bg-[#030303]">
-                
-                {/* Left panel: Elements picker */}
-                <div className="col-span-3 border-r border-white/5 bg-[#08080b] p-4 hidden md:flex flex-col space-y-4 overflow-y-auto text-left">
-                  <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 font-heading">Draggable Elements</div>
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <div className="p-3 bg-white/5 border border-white/5 rounded-lg hover:border-violet-500/30 hover:bg-white/10 cursor-pointer flex flex-col items-center justify-center space-y-1.5 transition-colors">
-                      <Layout className="h-4 w-4 text-violet-400" />
-                      <span className="text-[9px] text-slate-300">Columns</span>
-                    </div>
-                    <div className="p-3 bg-white/5 border border-white/5 rounded-lg hover:border-violet-500/30 hover:bg-white/10 cursor-pointer flex flex-col items-center justify-center space-y-1.5 transition-colors">
-                      <Type className="h-4 w-4 text-violet-400" />
-                      <span className="text-[9px] text-slate-300">Heading</span>
-                    </div>
-                    <div className="p-3 bg-white/5 border border-white/5 rounded-lg hover:border-violet-500/30 hover:bg-white/10 cursor-pointer flex flex-col items-center justify-center space-y-1.5 transition-colors">
-                      <ImageIcon className="h-4 w-4 text-violet-400" />
-                      <span className="text-[9px] text-slate-300">Image</span>
-                    </div>
-                    <div className="p-3 bg-white/5 border border-white/5 rounded-lg hover:border-violet-500/30 hover:bg-white/10 cursor-pointer flex flex-col items-center justify-center space-y-1.5 transition-colors">
-                      <Code className="h-4 w-4 text-violet-400" />
-                      <span className="text-[9px] text-slate-300">HTML Code</span>
-                    </div>
-                  </div>
-
-                  <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-4 mb-1.5 font-heading">Styles & Spacing</div>
-                  <div className="space-y-2">
-                    <div className="p-2 bg-white/5 border border-white/5 rounded-lg flex items-center justify-between text-[10px] text-slate-300">
-                      <span>Line Height</span>
-                      <span>1.6</span>
-                    </div>
-                    <div className="p-2 bg-white/5 border border-white/5 rounded-lg flex items-center justify-between text-[10px] text-slate-300">
-                      <span>Font Family</span>
-                      <span>Outfit</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Central Canvas viewport */}
-                <div className="col-span-12 md:col-span-9 p-6 overflow-y-auto flex items-start justify-center">
-                  <div className={`transition-all duration-300 w-full max-w-2xl bg-[#09090c] border border-white/5 rounded-xl overflow-hidden p-6 ${
-                    editorDevice === 'mobile' ? 'max-w-xs' : 'max-w-xl'
-                  }`}>
-                    {editorSuccess ? (
-                      <div className="h-64 flex flex-col items-center justify-center space-y-3">
-                        <CheckCircle2 className="h-10 w-10 text-green-400 animate-bounce" />
-                        <h4 className="text-xs font-bold text-white font-heading">Layout Changes Saved</h4>
-                        <p className="text-[10px] text-slate-500">Design assets successfully refreshed in workspace catalog.</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="border-2 border-dashed border-white/5 rounded-lg p-4 flex flex-col items-center justify-center min-h-[300px] text-center text-slate-500 space-y-4">
-                          <Terminal className="h-8 w-8 text-violet-400" />
-                          <div className="space-y-1">
-                            <div className="text-xs font-bold text-slate-300 font-heading">Visual Canvas Editable</div>
-                            <p className="text-[10px] text-slate-500 max-w-xs mx-auto">
-                              Select draggable sidebar blocks, insert dynamic fields, or customize inline branding rules.
-                            </p>
-                          </div>
-                          <div className="w-full h-px bg-white/5" />
-                          {renderMockDocumentContent(editTemplate.category, editTemplate.title)}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Footer */}
-              <div className="flex justify-end space-x-3 px-6 py-4 border-t border-white/5 bg-[#09090c]/85">
-                <Button variant="outline" size="sm" onClick={() => setEditTemplate(null)}>
-                  Cancel Edit
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  disabled={editorSaving || editorSuccess}
-                  onClick={handleSaveEditor}
-                  className="flex items-center space-x-1.5"
-                >
-                  {editorSaving ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin text-white" />
-                      <span>Saving Changes...</span>
-                    </>
-                  ) : (
-                    <span>Save Layout Changes</span>
-                  )}
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        )}
 
         {/* 3. EXPORT DIALOG MODAL */}
         {exportTemplate && (

@@ -17,6 +17,7 @@ import { ForgotPassword } from './components/auth/ForgotPassword';
 import { ResetPassword } from './components/auth/ResetPassword';
 import { VerifyEmail } from './components/auth/VerifyEmail';
 import { Dashboard } from './components/auth/Dashboard';
+import { DocumentEditor } from './components/editor/DocumentEditor';
 
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
 
@@ -72,6 +73,8 @@ const AppContent = () => {
       return <VerifyEmail />;
     case 'dashboard':
       return <Dashboard />;
+    case 'editor':
+      return <DocumentEditor />;
     case 'landing':
     default:
       return (
