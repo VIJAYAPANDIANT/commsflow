@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Layers, Send, MessageSquare, X } from 'lucide-react';
+import { 
+  Layers, Send, MessageSquare, X, 
+  Building2, Briefcase, BookOpen, ShieldCheck, 
+  Download, FileText, LayoutGrid, CheckCircle2, 
+  Activity, HelpCircle 
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation } from '../../context/NavigationContext';
 
@@ -61,7 +66,7 @@ export const Footer: React.FC = () => {
         return {
           title: "About CommsFlow AI",
           subtitle: "Visual Document & Communication Studio",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <Building2 className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -81,7 +86,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Careers at CommsFlow",
           subtitle: "Help us shape the future of visual builder pipelines",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <Briefcase className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left">
               <p className="text-slate-300">
@@ -109,7 +114,7 @@ export const Footer: React.FC = () => {
         return {
           title: "CommsFlow Engineering Blog",
           subtitle: "Latest release notes, editor engineering, and brand guides updates",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <BookOpen className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left">
               <div className="space-y-3.5">
@@ -135,7 +140,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Enterprise Security Policy",
           subtitle: "SOC2 Compliance, Guardrails Lockdown, and Data Encryption",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <ShieldCheck className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -156,7 +161,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Branding & Press Kit",
           subtitle: "Vector assets, logos, and media guidelines",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <Download className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -178,7 +183,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Privacy Policy Guidelines",
           subtitle: "Client-only visual processing declaration",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <FileText className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -199,7 +204,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Terms of Service Agreement",
           subtitle: "Fair-use document visual editor guidelines",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <FileText className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -217,7 +222,7 @@ export const Footer: React.FC = () => {
         return {
           title: "GDPR Compliance Registry",
           subtitle: "User privacy, rights, and local containment data nodes",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <CheckCircle2 className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-slate-300 text-xs md:text-sm leading-relaxed text-left">
               <p>
@@ -235,7 +240,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Developer Documentation",
           subtitle: "API references, visual builder integration & SDK guides",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <FileText className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <p>
@@ -261,7 +266,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Layout Design Templates",
           subtitle: "Pre-made newsletter, invoice, and incident layouts",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <LayoutGrid className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <p>
@@ -289,7 +294,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Email Delivery Guidelines",
           subtitle: "Maximize open rates, improve layout scaling, and bypass spam blocks",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <CheckCircle2 className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <p>
@@ -307,7 +312,7 @@ export const Footer: React.FC = () => {
         return {
           title: "CommsFlow Service Status",
           subtitle: "Real-time health, rendering pipeline performance, and API status",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <Activity className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <div className="flex items-center justify-between p-3 rounded-xl bg-green-500/10 border border-green-500/20">
@@ -334,7 +339,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Customer Help Center",
           subtitle: "Frequently Asked Questions & visual editor guidance",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <HelpCircle className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <div className="space-y-3.5">
@@ -356,7 +361,7 @@ export const Footer: React.FC = () => {
         return {
           title: "Analytics Hub & Tracking",
           subtitle: "Real-time delivery metrics, open rates, and bounce logs",
-          icon: <Layers className="h-5 w-5 text-violet-400" />,
+          icon: <Activity className="h-5 w-5 text-violet-400" />,
           content: (
             <div className="space-y-4 text-xs md:text-sm leading-relaxed text-left text-slate-300">
               <p>
